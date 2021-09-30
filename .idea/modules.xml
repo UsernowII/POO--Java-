@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/org.jsantos.pooherencia.iml" filepath="$PROJECT_DIR$/org.jsantos.pooherencia.iml" />
+      <module fileurl="file://$PROJECT_DIR$/poo_clases_abstractas.iml" filepath="$PROJECT_DIR$/poo_clases_abstractas.iml" />
     </modules>
   </component>
 </project>
