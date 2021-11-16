@@ -1,18 +1,21 @@
 package org.jsantos.poointerfaces.repository;
 
-import org.jsantos.poointerfaces.modelo.Cliente;
+
+import org.jsantos.poointerfaces.repository.excepciones.AccesoDatosException;
+
+
 
 import java.util.List;
 
-public interface CrudRepositorio {
+public interface CrudRepositorio<T> {
 
-    List<Cliente>listar();
+    List<T>listar();
 
-    Cliente byId(Integer id);
+    T byId(Integer id) throws AccesoDatosException;
 
-    void crear(Cliente cliente);
+    void crear(T t) throws AccesoDatosException;
 
-    void editar (Cliente cliente);
+    void editar (T t) throws AccesoDatosException;
 
-    void eliminar(Integer id);
+    void eliminar(Integer id) throws AccesoDatosException;
 }

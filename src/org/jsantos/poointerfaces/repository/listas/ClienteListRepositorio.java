@@ -1,59 +1,30 @@
-package org.jsantos.poointerfaces.repository;
+package org.jsantos.poointerfaces.repository.listas;
 
 import org.jsantos.poointerfaces.modelo.Cliente;
+import org.jsantos.poointerfaces.repository.AbstractaListRepositorio;
+import org.jsantos.poointerfaces.repository.Direccion;
+import org.jsantos.poointerfaces.repository.excepciones.LecturaAccesoDatosException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio {
+public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente> {
 
-    private List<Cliente> dataSource;
-
-
-    public ClienteListRepositorio() {
-        this.dataSource =  new ArrayList<>();
-    }
-
-    // READ
-    @Override
-    public List<Cliente> listar() {
-        return dataSource;
-    }
-
-    //   READ  Buscar por ID
-    @Override
-    public Cliente byId(Integer id) {
-        Cliente resultado = null;
-        for (Cliente cli:dataSource) {
-           if(cli.getId()!= null && cli.getId().equals(id)){
-               resultado = cli;
-               break;
-           }
-        }
-        return resultado;
-    }
-
-
-    // CREATE
-    @Override
-    public void crear(Cliente cliente) {
-        this.dataSource.add(cliente);
-    }
 
     // UPDATE
     @Override
     public void editar(Cliente cliente) {
+        try{
         Cliente c = this.byId(cliente.getId());
         c.setApellido(cliente.getApellido());
         c.setNombre(cliente.getNombre());
+
+        }catch (LecturaAccesoDatosException le){
+            le.printStackTrace();
+        }
     }
 
-    //DELETE
-    @Override
-    public void eliminar(Integer id) {
-        this.dataSource.remove(this.byId(id));
-    }
 
     //Ordenable
     @Override
@@ -86,16 +57,5 @@ public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio
         });
         return listaOrdenada;
     }
-    //Paginable
 
-    @Override
-    public List<Cliente> listar(int desde, int hasta) {
-        return dataSource.subList(desde,hasta);
-    }
-
-
-    @Override
-    public int total() {
-        return this.dataSource.size();
-    }
 }
